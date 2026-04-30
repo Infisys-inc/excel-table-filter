@@ -1,6 +1,12 @@
 {
   "name": "excel-table-filter",
   "version": "1.0.0",
+  "description": "Vanilla JS plugin to generate a checkbox drop-down table-filter",
+  "author": {
+    "name": "INFISYS INC",
+    "email": "corp@infisys.net"
+  },
+  "license": "MIT",
   "type": "module",
   "main": "dist/excel-table-filter-bundle.js",
   "types": "dist/types/ExcelTableFilter.d.ts",
@@ -15,7 +21,6 @@
     "LICENSE",
     "README.md"
   ],
-  "description": "Vanilla JS plugin to generate a checkbox drop-down table-filter",
   "repository": {
     "type": "git",
     "url": "https://github.com/Infisys-inc/excel-table-filter.git"
@@ -30,11 +35,6 @@
     "verify": "npm run typecheck && npm run build",
     "prepack": "npm run verify"
   },
-  "author": {
-    "name": "INFISYS INC",
-    "email": "corp@infisys.net"
-  },
-  "license": "MIT",
   "engines": {
     "node": ">=20",
     "npm": ">=10"

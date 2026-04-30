@@ -10,7 +10,8 @@
     "declaration": true,
     "declarationDir": "dist/types",
     "emitDeclarationOnly": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDir": "./src"
   },
   "include": ["src/**/*"]
 }

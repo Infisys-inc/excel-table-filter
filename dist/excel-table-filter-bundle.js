@@ -183,7 +183,9 @@ var ExcelTableFilter = (function () {
                 const indexStr = target.getAttribute('data-index');
                 if (indexStr === null)
                     return;
-                const index = parseInt(indexStr);
+                const index = parseInt(indexStr, 10);
+                if (Number.isNaN(index) || !this.filterMenus[index])
+                    return;
                 if (target.classList.contains('item')) {
                     this.filterMenus[index].updateSelectAll();
                 }
@@ -197,7 +199,7 @@ var ExcelTableFilter = (function () {
                 if (sortTrigger) {
                     const span = sortTrigger.querySelector('span');
                     if (span) {
-                        const column = parseInt(span.getAttribute('data-column') || '0');
+                        const column = parseInt(span.getAttribute('data-column') || '0', 10);
                         const order = span.className;
                         this.sort(column, order);
                         this.updateRowVisibility();
@@ -207,7 +209,7 @@ var ExcelTableFilter = (function () {
             this.target.addEventListener('keyup', (event) => {
                 const searchInput = event.target.closest('.dropdown-filter-search')?.querySelector('input');
                 if (searchInput) {
-                    const index = parseInt(searchInput.getAttribute('data-index') || '0');
+                    const index = parseInt(searchInput.getAttribute('data-index') || '0', 10);
                     this.filterMenus[index].searchToggle(searchInput.value);
                     this.updateRowVisibility();
                 }
@@ -223,7 +225,7 @@ var ExcelTableFilter = (function () {
             this.rows.forEach(row => {
                 const tds = row.children;
                 const visible = selectedLists.every(list => {
-                    const content = tds[list.column].innerText.trim().replace(/\s+/g, ' ');
+                    const content = tds[list.column].textContent.trim().replace(/\s+/g, ' ');
                     return list.selected.has(content);
                 });
                 row.style.display = visible ? '' : 'none';
@@ -236,8 +238,8 @@ var ExcelTableFilter = (function () {
                 return;
             const rows = Array.from(tbody.querySelectorAll('tr'));
             rows.sort((a, b) => {
-                const A = a.children[column].innerText.toUpperCase();
-                const B = b.children[column].innerText.toUpperCase();
+                const A = a.children[column].textContent.toUpperCase();
+                const B = b.children[column].textContent.toUpperCase();
                 const numA = Number(A);
                 const numB = Number(B);
                 if (!isNaN(numA) && !isNaN(numB)) {
